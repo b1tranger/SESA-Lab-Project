@@ -1,25 +1,41 @@
-body{
+body {
 
     background-color: black;
 }
 
 
 .section-01 {
-    height:100vh;
+    height: 100vh;
     background-color: azure;
-    margin:20px;
+    margin: 20px;
 
 }
 
-.heading-with-margin{
+.heading-with-margin {
 
     text-align: center;
     padding-top: 100px;
     font-size: 2rem;
 }
 
-.grid-section{
-display: grid;
-grid-template-columns: ;
+.grid-section {
+    /* display: grid; */
+    /* grid-template-columns: repeat(auto-fill, minmax(300px, 3fr)); */
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    gap: 1rem;
+    /* place-items: center; */
+    margin: 20px;
+
+}
+
+.grid-sub-section {
+    /* position: relative; */
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+    padding: 20px;
+    border-radius: 10px;
 
 }
