@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Hero - Connecting People</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for smooth scrolling and full-screen sections */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            overscroll-behavior: none;
+        }
+        .full-screen-section {
+            min-height: 100vh; /* Use min-height to accommodate content */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 4rem; /* Add padding for content */
+            padding-bottom: 4rem;
+        }
+        /* Style for the hero background image */
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        /* Desktop Navigation Styles */
+        @media (min-width: 768px) {
+            .desktop-nav {
+                position: fixed;
+                top: 50%;
+                left: 2rem;
+                transform: translateY(-50%);
+                z-index: 50;
+            }
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 767px) {
+            .mobile-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 50;
+            }
+        }
+
+        /* Sticky Header Styles */
+        .sticky-header {
+            position: fixed;
+            top: -200px; /* Initially hidden off-screen */
+            left: 0;
+            right: 0;
+            z-index: 40;
+            transition: top 0.3s ease-in-out;
+        }
+        .sticky-header.show {
+            top: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation -->
+    <nav>
+        <!-- Desktop Navigation -->
+        <div class="hidden md:block desktop-nav">
+            <div class="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-gray-200 shadow-lg">
+                <ul class="space-y-4">
+                    <li><a href="#home" class="block p-3 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white transition-all duration-300" title="Home"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg></a></li>
+                    <li><a href="#about" class="block p-3 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white transition-all duration-300" title="About"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></a></li>
+                    <li><a href="#services" class="block p-3 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white transition-all duration-300" title="Services"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg></a></li>
+                    <li><a href="#contact" class="block p-3 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white transition-all duration-300" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></a></li>
+                    <li><a href="#backend" class="block p-3 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white transition-all duration-300" title="Backend Demo"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="md:hidden mobile-nav">
+            <div class="bg-white/80 backdrop-blur-sm border-t border-gray-200">
+                <ul class="flex justify-around p-2">
+                    <li><a href="#home" class="p-3 text-gray-700 rounded-lg hover:bg-blue-100 active:bg-blue-200 transition-all duration-300" title="Home"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg></a></li>
+                    <li><a href="#about" class="p-3 text-gray-700 rounded-lg hover:bg-blue-100 active:bg-blue-200 transition-all duration-300" title="About"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></a></li>
+                    <li><a href="#services" class="p-3 text-gray-700 rounded-lg hover:bg-blue-100 active:bg-blue-200 transition-all duration-300" title="Services"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg></a></li>
+                    <li><a href="#contact" class="p-3 text-gray-700 rounded-lg hover:bg-blue-100 active:bg-blue-200 transition-all duration-300" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></a></li>
+                    <li><a href="#backend" class="p-3 text-gray-700 rounded-lg hover:bg-blue-100 active:bg-blue-200 transition-all duration-300" title="Backend Demo"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Sticky Header -->
+    <div id="sticky-header" class="sticky-header bg-white/90 backdrop-blur-sm shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-center items-center">
+             <a href="login.html" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
+                Services
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <main>
+        <!-- Section 1: Hero -->
+        <section id="home" class="full-screen-section hero-bg relative text-white">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="relative z-10 text-center p-4">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">Welcome to Support Hero</h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">Connecting those in need with those who can help. A community-driven support system.</p>
+                <div id="hero-buttons" class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#about" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
+                        Learn More
+                    </a>
+                    <a href="login.html" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">
+                        Services
+                    </a>
+                </div>
+            </div>
+            <a href="#about" class="absolute bottom-10 z-10 animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </a>
+        </section>
+
+        <!-- Section 2: About -->
+        <section id="about" class="full-screen-section bg-white p-8 md:p-16">
+            <div class="max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">About Our Mission</h2>
+                <p class="text-lg md:text-xl text-gray-600 mb-4">
+                    Support Hero is a platform designed to bridge the gap between consumers seeking services and providers ready to offer them. Our unique model allows for direct compensation and community-driven donations, creating a sustainable and supportive ecosystem.
+                </p>
+                <p class="text-lg md:text-xl text-gray-600">
+                    Whether you need help with daily tasks, professional services, or emergency support, our network of vetted providers is here for you. Join us in building a stronger, more connected community.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Services -->
+        <section id="services" class="full-screen-section bg-gray-50 p-8 md:p-16">
+            <div class="max-w-6xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10">How It Works</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Step 1 --><div class="bg-white p-6 rounded-xl shadow-md"><div class="text-blue-600 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></div><h3 class="text-xl font-semibold mb-2">1. Request a Service</h3><p class="text-gray-600">Consumers post their needs, from simple errands to specialized tasks.</p></div>
+                    <!-- Step 2 --><div class="bg-white p-6 rounded-xl shadow-md"><div class="text-blue-600 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.124-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.124-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><h3 class="text-xl font-semibold mb-2">2. Connect with a Provider</h3><p class="text-gray-600">Service providers accept requests that match their skills and availability.</p></div>
+                    <!-- Step 3 --><div class="bg-white p-6 rounded-xl shadow-md"><div class="text-blue-600 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.085a2 2 0 00-1.736.93L5.5 8m7-3V5a2 2 0 00-2-2H7a2 2 0 00-2 2v5m0 0v5a2 2 0 002 2h2.5" /></svg></div><h3 class="text-xl font-semibold mb-2">3. Compensate & Donate</h3><p class="text-gray-600">Providers are compensated, and consumers can donate to support the community.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Contact -->
+        <section id="contact" class="full-screen-section bg-white p-8 md:p-16">
+            <div class="max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
+                <p class="text-lg md:text-xl text-gray-600 mb-8">Have questions or want to get involved? We'd love to hear from you.</p>
+                <a href="mailto:contact@supporthero.com" class="bg-gray-800 hover:bg-black text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Contact Us</a>
+            </div>
+        </section>
+        
+        <!-- Section 5: Backend Demo -->
+        <section id="backend" class="full-screen-section bg-gray-900 text-white p-8 md:p-16">
+            <div class="max-w-6xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10">Admin & Backend Operations (Demo)</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- User Management -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg"><div class="text-green-400 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2" /></svg></div><h3 class="text-xl font-semibold mb-2">User Management</h3><p class="text-gray-400">Admin panel to manage consumers, service providers, and visitor feedback.</p></div>
+                    <!-- Service/Bounty Management -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg"><div class="text-green-400 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg></div><h3 class="text-xl font-semibold mb-2">Service Management</h3><p class="text-gray-400">Tools for admins to oversee service requests, bounties, and provider ranks.</p></div>
+                    <!-- Financials Management -->
+                    <div class="bg-gray-800 p-6 rounded-xl shadow-lg"><div class="text-green-400 mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><h3 class="text-xl font-semibold mb-2">Financials</h3><p class="text-gray-400">Manage direct compensations and the flow of donations through the system.</p></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // JavaScript for the sticky header
+        document.addEventListener('DOMContentLoaded', function() {
+            const stickyHeader = document.getElementById('sticky-header');
+            const heroSection = document.getElementById('home');
+
+            // Function to toggle the sticky header
+            const toggleStickyHeader = () => {
+                if (window.scrollY > heroSection.offsetHeight) {
+                    stickyHeader.classList.add('show');
+                } else {
+                    stickyHeader.classList.remove('show');
+                }
+            };
+
+            // Listen for scroll events
+            window.addEventListener('scroll', toggleStickyHeader);
+        });
+    </script>
+
+</body>
+</html>

@@ -41,3 +41,13 @@ Add a button besides "Learn More" called "Services" that takes the user to anoth
 
 
 Add a few demo sections from the last section that will be used for some backend operations.
+
+###############################################################
+
+Use raw CSS, remove frameworks.
+
+
+
+Align the "Services" to the right of the top bar (when the user scrolls out of the Hero Section and the Button moves to the top.)
+
+###############################################################
