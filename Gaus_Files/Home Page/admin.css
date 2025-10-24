@@ -1,0 +1,178 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to the top, not center vertically */
+    min-height: 100vh; /* Ensure it takes full viewport height */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px; /* Max width for the entire dashboard */
+    text-align: center;
+}
+
+.dashboard-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block; /* To make the underline fit the text */
+}
+
+.dashboard-container h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -10px; /* Adjust distance from text */
+    height: 2px;
+    background-color: #333;
+}
+
+.dashboard-content {
+    display: flex;
+    gap: 30px; /* Space between the two main cards */
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    justify-content: center; /* Center cards when wrapped */
+    align-items: flex-start; /* Align cards to the top */
+}
+
+/* Card base styles */
+.admin-info-card,
+.overview-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.admin-info-card {
+    flex: 1; /* Allows it to grow and shrink */
+    min-width: 280px; /* Minimum width before wrapping */
+    max-width: 350px; /* Max width to resemble the image */
+}
+
+.admin-info-card h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.admin-info-card p {
+    margin: 10px 0;
+    font-size: 1em;
+}
+
+.overview-card {
+    flex: 2; /* Allows it to take more space than admin-info */
+    min-width: 320px; /* Minimum width before wrapping */
+    max-width: 700px; /* Max width for overview card */
+}
+
+.overview-card h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.overview-note {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid */
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.metric-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px 10px;
+    text-align: center;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px; /* Ensure a consistent height for squares */
+}
+
+.metric-item:hover {
+    background-color: #e9e9e9;
+    transform: translateY(-2px);
+}
+
+.analysis-note {
+    font-size: 0.9em;
+    color: #666;
+    text-align: right; /* Aligned to the right as in the picture */
+    margin-top: 20px;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .dashboard-container h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-content {
+        flex-direction: column; /* Stack vertically on small screens */
+        gap: 20px;
+    }
+
+    .admin-info-card,
+    .overview-card {
+        max-width: 100%; /* Take full width */
+    }
+
+    /* Order on mobile: Overview first, then Admin Info */
+    .admin-info-card {
+        order: 2; /* Place admin info below overview */
+    }
+
+    .overview-card {
+        order: 1; /* Place overview first */
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Smaller grid items for mobile */
+        gap: 10px;
+    }
+
+    .metric-item {
+        padding: 15px 5px;
+        min-height: 50px;
+    }
+
+    .overview-note, .analysis-note {
+        text-align: center; /* Center notes on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    .dashboard-container h1 {
+        font-size: 1.8em;
+    }
+
+    .admin-info-card h2, .overview-card h2 {
+        font-size: 1.3em;
+    }
+}
