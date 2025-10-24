@@ -32,18 +32,19 @@
     </style>
     <?php
 
-    include("connection.php");
+    include("../connection.php");
 
-    if (isset($_GET['submit'])) {
+    if (isset($_POST['submit'])) {
 
 
-        $email = $_GET['input1'];
-        $password = $_GET['input2'];
-        $sql = "select * from table_1 where column_1='$email' and column_2='$password' ";
+        $email = $_POST['input1'];
+        $password = $_POST['input2'];
+        $sql = "select * from account where email='$email' and password='$password' ";
         $result = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($result);
         if ($count == 1) {
             // include("Welcome.php");
+            echo '<script>alert("Login Successful")</script>';
             header("location:Welcome.php");
         } else {
             echo '<script>alert("Login Failed")</script>';
@@ -60,27 +61,17 @@
         <br>
         <br>
         <div class="sub-section">
-            <form method="GET" class="form">
+            <form method="POST" class="form">
                 <h2 style="text-align: center;">Login Form</h2>
                 <label for="input1">Input Email: </label>
                 <input name="input1" type="email"><br><br>
                 <label for="input2">Input Password: </label>
-                <input name="input2" type="password"><br><br>
+                <input name="input2" type="password"> &nbsp;(numbers only)<br><br>
                 <div style="display:flex;justify-content:center;"><input type="submit" name="submit"></div>
 
             </form>
         </div>
-        <div class="sub-section">
-            <form method="GET" class="form">
-                <h2 style="text-align: center;">Input Data</h2>
-                <label for="input1">Input Email: </label>
-                <input name="input1" type="email" value="<?php echo $input1; ?>"><br><br>
-                <label for="input2">Input Password: </label>
-                <input name="input2" type="text" value="<?php echo $input2; ?>"><br><br>
-                <!-- <div style="display:flex;justify-content:center;"><input type="submit" name="input2" value="enter"></div> -->
 
-            </form>
-        </div>
     </div>
 
 </body>
