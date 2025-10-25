@@ -37,14 +37,15 @@
     if (isset($_POST['submit'])) {
 
 
-        $email = $_POST['input1'];
-        $password = $_POST['input2'];
-        $sql = "select * from account where email='$email' and password='$password' ";
+        $email = trim($_POST['input1']);
+        $password = trim($_POST['input2']);
+        $type = $_POST['input_type'];
+        $sql = "select * from account where email='$email' ";
         $result = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($result);
         if ($count == 1) {
             // include("Welcome.php");
-            echo '<script>alert("Login Successful")</script>';
+            // echo '<script>alert("Login Successful")</script>';
             header("location:Welcome.php");
         } else {
             echo '<script>alert("Login Failed")</script>';
@@ -63,11 +64,19 @@
         <div class="sub-section">
             <form method="POST" class="form">
                 <h2 style="text-align: center;">Login Form</h2>
+                <label for="input_type">User Type: </label>
+                <select name="input_type">
+                    <option value=""></option>
+                    <option value="provider">Provider</option>
+                    <option value="consumer">Consumer</option>
+                    <option value="donor">Donor</option>
+                </select>
+                <br><br>
                 <label for="input1">Input Email: </label>
                 <input name="input1" type="email"><br><br>
                 <label for="input2">Input Password: </label>
                 <input name="input2" type="password"> &nbsp;(numbers only)<br><br>
-                <div style="display:flex;justify-content:center;"><input type="submit" name="submit"></div>
+                <div style="display:flex;justify-content:center;"><input type="submit"></div>
 
             </form>
         </div>

@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" type="text/css" href="index.css"> -->
     <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -20,37 +21,11 @@
         <div class="desktop-nav">
             <div class="desktop-nav-card">
                 <ul>
-                    <!-- <li><a href="#home" title="Home"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg></a></li> -->
-                    <li><a href="#account" title="About"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg></a></li>
-                    <li><a href="#donation" title="Services"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg></a></li>
-                    <li><a href="#services" title="Services"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg></a></li>
-
-                    <li><a href="#backend" title="Backend Demo"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h7" />
-                            </svg></a></li>
-                    <li><a href="#contact" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg></a></li>
+                    <li><a href="#about" title="About"><i class="fa-solid fa-circle-info" style="font-size: 1.8rem;"></i></a></li>
+                    <li><a href="#services" title="Services"><i class="fa-solid fa-list" style="font-size: 1.8rem;"></i></a></li>
+                    <li><a href="#account" title="Services"><i class="fa-solid fa-inbox" style="font-size: 1.8rem;"></i></a></li>
+                    <li><a href="#donation" title="Donation"><i class="fa-solid fa-hand-holding-medical"  style="font-size: 1.8rem;"></i></a></li>
+                    <li><a href="#contact" title="Contact"><i class="fa-solid fa-envelope"  style="font-size: 1.8rem;"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -58,38 +33,12 @@
         <!-- Mobile Navigation -->
         <div class="mobile-nav">
             <ul>
-                <!-- <li><a href="#home" title="Home"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg></a></li> -->
-                <li><a href="#account" title="About"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg></a></li>
-                <li><a href="#donation" title="Services"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg></a></li>
-                <li><a href="#services" title="Services"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg></a></li>
-
-                <li><a href="#backend" title="Backend Demo"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h7" />
-                        </svg></a></li>
-                <li><a href="#contact" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg></a></li>
-            </ul>
+                    <li><a href="#about" title="About"><i class="fa-solid fa-circle-info" style="font-size: 1.8rem;"></i></a></li>
+                    <li><a href="#services" title="Services"><i class="fa-solid fa-list" style="font-size: 1.8rem;"></i></a></li>
+                    <li><a href="#account" title="Services"><i class="fa-solid fa-inbox" style="font-size: 1.8rem;"></i></a></li>
+                    <li><a href="#donation" title="Donation"><i class="fa-solid fa-hand-holding-medical"  style="font-size: 1.8rem;"></i></a></li>
+                    <li><a href="#contact" title="Contact"><i class="fa-solid fa-envelope"  style="font-size: 1.8rem;"></i></a></li>
+                </ul>
         </div>
     </nav>
 
@@ -127,7 +76,14 @@
         </section>
 
         <!-- Section 2: About -->
-        <section id="about" class="full-screen-section" style="background-color: white;">
+        <!-- <section id="about" class="full-screen-section" style="background-color: white;">
+            <div class="section-content">
+
+            </div>
+        </section> -->
+
+        <!-- Section 5: Services -->
+        <section id="about" class="full-screen-section" style="background-color: #f9fafb;">
             <div class="section-content">
                 <h2>About Our Mission</h2>
                 <p>Support Hero is a platform designed to bridge the gap between consumers seeking services and
@@ -135,58 +91,6 @@
                     donations, creating a sustainable and supportive ecosystem.</p>
                 <p>Whether you need help with daily tasks, professional services, or emergency support, our network of
                     vetted providers is here for you. Join us in building a stronger, more connected community.</p>
-            </div>
-        </section>
-
-        <!-- Section 3: Accounts -->
-        <section id="account" class="full-screen-section" style="background-color: white;">
-            <div class="section-content">
-                <h2>Get involved</h2>
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2" />
-                            </svg></div>
-                        <!-- <h3>Consumer Account</h3> -->
-                        <a href="../Registration_Login/registration_form.php" class="btn btn-green">Register as a Consumer</a>
-                        <p>As a consumer, you can request for services or accept an existing offer. They are our core
-                            users.</p>
-                        <p>Already registered? Go to <a href="../Registration_Login/login.php">Login</a></p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                            </svg></div>
-                        <!-- <h3>Provider Account</h3> -->
-                        <a href="../Registration_Login/registration_form.php" class="btn btn-blue">Register as a Provider</a>
-                        <p>As a provider, you can accept a request or create an offer for the consumers. They areour
-                            main driving force.</p>
-                        <p>Already registered? Go to <a href="../Registration_Login/login.php">Login</a></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Section 4: Accounts -->
-        <section id="donation" class="full-screen-section" style="background-color: #f9fafb;">
-            <div class="section-content">
-                <h2>Support Our Community</h2>
-                <p>Your donations help us maintain the platform, support our providers, and ensure that help is
-                    available
-                    to everyone, regardless of their ability to pay. Every contribution makes a difference.</p>
-                <p>Help us build a stronger, more connected community by making a contribution today.</p>
-                <a href="#payment-link" class="btn btn-blue" style="margin-top: 1.5rem;">Become a Donator</a>
-            </div>
-        </section>
-
-        <!-- Section 5: Services -->
-        <section id="services" class="full-screen-section" style="background-color: #f9fafb;">
-            <div class="section-content">
                 <h2>How It Works</h2>
                 <div class="grid-3">
                     <div class="card">
@@ -221,9 +125,8 @@
         </section>
 
 
-
         <!-- Section 6: Backend Demo -->
-        <section id="backend" class="full-screen-section">
+        <section id="services" class="full-screen-section">
             <div class="section-content">
                 <h2>Admin & Backend Operations (Demo)</h2>
                 <div class="grid-3">
@@ -258,7 +161,60 @@
             </div>
         </section>
 
-        <!-- Section 7: Backend Demo -->
+
+        <!-- Section 3: Accounts -->
+        <section id="account" class="full-screen-section" style="background-color: white;">
+            <div class="section-content">
+                <h2>Get involved</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2" />
+                            </svg></div>
+                        <!-- <h3>Consumer Account</h3> -->
+                        <a href="../Registration_Login/registration_form.php" class="btn btn-green">Register as a
+                            Consumer</a>
+                        <p>As a consumer, you can request for services or accept an existing offer. They are our core
+                            users.</p>
+                        <p>Already registered? Go to <a href="../Registration_Login/login.php">Login</a></p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            </svg></div>
+                        <!-- <h3>Provider Account</h3> -->
+                        <a href="../Registration_Login/registration_form.php" class="btn btn-blue">Register as a
+                            Provider</a>
+                        <p>As a provider, you can accept a request or create an offer for the consumers. They areour
+                            main driving force.</p>
+                        <p>Already registered? Go to <a href="../Registration_Login/login.php">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 4: Accounts -->
+        <section id="donation" class="full-screen-section" style="background-color: #f9fafb;">
+            <div class="section-content">
+                <h2>Support Our Community</h2>
+                <p>Your donations help us maintain the platform, support our providers, and ensure that help is
+                    available
+                    to everyone, regardless of their ability to pay. Every contribution makes a difference.</p>
+                <p>Help us build a stronger, more connected community by making a contribution today.</p>
+                <a href="#payment-link" class="btn btn-blue" style="margin-top: 1.5rem;">Become a Donator</a>
+            </div>
+        </section>
+
+
+
+
+
+        <!-- Section 7: Contact -->
         <section id="contact" class="full-screen-section">
             <div class="section-content">
                 <h2>Contact Us</h2>

@@ -42,8 +42,8 @@
         // $id = trim($_POST['input_id']);
         $type = $_POST['input_type'];
         $email = trim($_POST['input_email']);
-        $password = $_POST['input_password'];
-        $confirm = $_POST['input_password2'];
+        $password = trim($_POST['input_password']);
+        $confirm = trim($_POST['input_password2']);
     }
     // $sql2 = "select email from table_1 where email='$email'";
 
@@ -57,11 +57,11 @@
 
         // passing to the Database
     
-        $hash = password_hash($password, PASSWORD_DEFAULT);
+        // $hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "insert into account(email, password, username, type) values('$email','$password','$username','$type')";
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            echo '<script>alert("Signup successful")</script>';
+            // echo '<script>alert("Signup successful")</script>';
             header("location:login.php");
         }
     }
