@@ -173,7 +173,7 @@ if (isset($_POST['submit'])) {
 
     <div class="form-container">
         <div class="back-link-container">
-            <a href="../Home Page/index.php" class="btn-back">
+            <a href="../Home_Page/index.php" class="btn-back">
                 &larr; Go to Homepage
             </a>
             <br><br><br><br>
@@ -182,7 +182,7 @@ if (isset($_POST['submit'])) {
             <div class="form-message">
                 <h3>Login Successful</h3>
                 <p>Welcome back, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
-                <p><a href="../Home Page/index.php">Browse the Website</a></p>
+                <p><a href="../Home_Page/index.php">Browse the Website</a></p>
             </div>
         <?php } else { ?>
             <form method="POST" class="form">

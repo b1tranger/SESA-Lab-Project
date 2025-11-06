@@ -195,7 +195,7 @@ $result_transactions = mysqli_query($conn, $sql_get_transactions);
 
     <div class="form-container">
         
-        <a href="../Home Page/index.php" class="btn-back">
+        <a href="../Home_Page/index.php" class="btn-back">
             &larr; Go to Homepage
         </a>
 

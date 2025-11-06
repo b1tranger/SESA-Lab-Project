@@ -181,7 +181,7 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="form-container">
         <div class="back-link-container">
-            <a href="../Home Page/index.php" class="btn-back">
+            <a href="../Home_Page/index.php" class="btn-back">
                 &larr; Go to Homepage
             </a>
             <br><br><br><br>

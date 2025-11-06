@@ -209,7 +209,7 @@ if (isset($_POST['submit_feedback'])) {
             <div class="form-message">
                 <h3>Feedback Submitted!</h3>
                 <p>Thank you, <?php echo htmlspecialchars($username); ?>. We appreciate your input.</p>
-                <p><a href="../Home Page/index.php">Return to Homepage</a></p>
+                <p><a href="../Home_Page/index.php">Return to Homepage</a></p>
             </div>
         <?php } else { ?>
             <!-- SHOW FEEDBACK FORM -->
@@ -217,7 +217,7 @@ if (isset($_POST['submit_feedback'])) {
                 <h2>Submit Feedback</h2>
                 
                 <div style="text-align: center; margin-bottom: 2rem; font-size: 0.9rem;">
-                     <a href="../Home Page/index.php">&larr; Back to Homepage</a>
+                     <a href="../Home_Page/index.php">&larr; Back to Homepage</a>
                 </div>
 
                 <?php if (!empty($submit_error)) { ?>

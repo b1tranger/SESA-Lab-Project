@@ -227,7 +227,7 @@ if (isset($_POST['submit_donation'])) {
 
     <div class="form-container">
         <div class="back-link-container">
-            <a href="../Home Page/index.php" class="btn-back">
+            <a href="../Home_Page/index.php" class="btn-back">
                 &larr; Go to Homepage
             </a>
             <br><br><br><br>
@@ -265,7 +265,7 @@ if (isset($_POST['submit_donation'])) {
 
         <div
             style="text-align: center; font-size: 0.9rem; color: #ccc; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #444;">
-            <p><a href="../Home Page/index.php#donation">Learn about donations</a></p>
+            <p><a href="../Home_Page/index.php#donation">Learn about donations</a></p>
         </div>
 
     </div>

@@ -433,7 +433,7 @@ if ($is_logged_in) {
                 <h2>Admin Menu</h2>
             </div>
             <ul>
-                <li><a href="index.php">Go to Home Page</a></li>
+                <li><a href="index.php">Go to Home_Page</a></li>
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="profile.php"><?php echo $user_type; ?> Profile</a></li>
                 <li><a href="users.php">User List</a></li>

@@ -190,7 +190,7 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="form-container">
         <div class="back-link-container">
-            <a href="../Home Page/index.php" class="btn-back">
+            <a href="../Home_Page/index.php" class="btn-back">
                 &larr; Go to Homepage
             </a>
             <br><br><br><br>
@@ -255,7 +255,7 @@ if (isset($_POST['submit'])) {
                         <h3>Error</h3>
                         <p>Please fill out all fields correctly.</p>
                 <?php } ?>
-                <p><a href="../Home Page/index.php#services">Go back to Services</a></p>
+                <p><a href="../Home_Page/index.php#services">Go back to Services</a></p>
                 <p><a href="request_offer.php">Post another service</a></p>
             </div>
 

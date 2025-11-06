@@ -5,7 +5,7 @@ include("../connection.php"); // Adjust path if needed
 // --- SECURITY CHECK ---
 // If user is not an admin, redirect them to the homepage
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
-    header('Location: ../Home Page/index.php'); // Adjust path if needed
+    header('Location: ../Home_Page/index.php'); // Adjust path if needed
     exit;
 }
 
@@ -50,9 +50,9 @@ $result = mysqli_query($conn, $sql);
     <div class="task-list-container">
         <header class="task-list-header">
             <h1>Admin Task List</h1>
-            <a href="../Home Page/index.php" class="btn btn-back">Back to Home</a>
+            <a href="../Home_Page/index.php" class="btn btn-back">Back to Home</a>
             <?php if ($user_type == 'admin'): ?>
-                <a href="../Home Page/admin.php" class="btn btn-back">Back to Dashboard</a>
+                <a href="../Home_Page/admin.php" class="btn btn-back">Back to Dashboard</a>
             <?php endif ?>
 
         </header>

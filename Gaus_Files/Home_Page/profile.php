@@ -66,7 +66,7 @@ if ($result) {
                 <h2>User Menu</h2>
             </div>
             <ul>
-                <li><a href="index.php">Go to Home Page</a></li>
+                <li><a href="index.php">Go to Home_Page</a></li>
 
                 <?php if ($user_type == 'admin'): ?>
                     <li><a href="admin.php">Dashboard</a></li>
