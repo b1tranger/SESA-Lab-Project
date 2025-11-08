@@ -1,0 +1,160 @@
+/* Based on style.css but for a full-page list */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background-color: #f3f4f6; /* Light gray background */
+    color: #1f2937;
+}
+
+/* Container for the whole page */
+.list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1rem;
+}
+
+.list-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Grid layout for service cards */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual Service Card */
+.service-card {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.service-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 1.5rem;
+    flex-grow: 1; /* Makes card body fill space */
+}
+
+.service-meta {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin: 0 0 0.5rem 0;
+}
+.service-meta strong {
+    color: #374151;
+}
+
+.service-details {
+    font-size: 1rem;
+    color: #1f2937;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+.card-actions {
+    padding: 1rem 1.5rem;
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Status Indicator */
+.status-indicator {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    text-transform: capitalize;
+}
+.status-pending {
+    background-color: #fef3c7; /* Yellow */
+    color: #92400e;
+}
+.status-in_progress {
+    background-color: #dbeafe; /* Blue */
+    color: #1d4ed8;
+}
+.status-completed {
+    background-color: #d1fae5; /* Green */
+    color: #065f46;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-back {
+    background-color: #6b7280; /* Gray */
+    color: white;
+}
+.btn-back:hover {
+    background-color: #4b5563;
+}
+
+.btn-accept {
+    background-color: #2563eb; /* Blue */
+    color: white;
+}
+.btn-accept:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-complete {
+    background-color: #16a34a; /* Green */
+    color: white;
+}
+.btn-complete:hover {
+    background-color: #15803d;
+}
+
+.no-services {
+    font-size: 1.2rem;
+    color: #6b7280;
+    text-align: center;
+}

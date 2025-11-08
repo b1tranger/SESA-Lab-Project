@@ -1,0 +1,1 @@
+<!-- when clicking "view" from index.php->service section, it shows that service's details -->

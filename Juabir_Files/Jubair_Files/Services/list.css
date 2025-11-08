@@ -1,0 +1,111 @@
+/* Based on service.css but for a simple vertical list */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background-color: #f3f4f6; /* Light gray background */
+    color: #1f2937;
+}
+
+/* Container for the whole page */
+.list-container {
+    max-width: 900px; /* Narrower for a vertical list */
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1rem;
+}
+
+.list-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Vertical list layout */
+.vertical-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Individual List Item (replaces service-card) */
+.list-item {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.item-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.item-body {
+    padding: 1.5rem;
+    flex-grow: 1; /* Makes card body fill space */
+}
+
+.item-meta {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin: 0 0 0.5rem 0;
+}
+.item-meta strong {
+    color: #374151;
+}
+
+.item-content {
+    font-size: 1rem;
+    color: #1f2937;
+    line-height: 1.6;
+    margin-top: 1rem;
+    /* Preserve whitespace and newlines from database */
+    white-space: pre-wrap; 
+}
+
+/* "Back" Button Style (kept from service.css) */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-back {
+    background-color: #6b7280; /* Gray */
+    color: white;
+}
+.btn-back:hover {
+    background-color: #4b5563;
+}
+
+.no-entries {
+    font-size: 1.2rem;
+    color: #6b7280;
+    text-align: center;
+    padding: 2rem;
+}

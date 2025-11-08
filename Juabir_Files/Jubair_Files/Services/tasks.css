@@ -1,0 +1,235 @@
+/* Based on service.css but for a task list */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background-color: #f3f4f6; /* Light gray background */
+    color: #1f2937;
+    padding-bottom: 5rem; /* Ensure space at bottom */
+}
+
+/* Container for the whole page */
+.task-list-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.task-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1rem;
+}
+
+.task-list-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* "Add New Task" Form */
+.add-task-form {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-group input[type="text"] {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Button Styles (re-using .btn from service.css concept) */
+.btn {
+    display: inline-flex; /* Use flex for icon centering */
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap; /* Prevent text wrap */
+}
+
+.btn-back {
+    background-color: #6b7280; /* Gray */
+    color: white;
+}
+.btn-back:hover {
+    background-color: #4b5563;
+}
+
+.btn-add {
+    background-color: #2563eb; /* Blue */
+    color: white;
+}
+.btn-add:hover {
+    background-color: #1d4ed8;
+}
+
+/* Task List Styles */
+.task-list-main {
+    background-color: white;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    overflow: hidden; /* To clip list items */
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item.completed {
+    background-color: #f9fafb;
+}
+
+.task-checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0; /* Prevent checkbox from shrinking */
+}
+
+.task-content {
+    flex-grow: 1; /* Take up available space */
+    min-width: 0; /* Allow text to wrap/be edited */
+}
+
+.task-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #1f2937;
+    transition: color 0.3s;
+}
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #6b7280;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* Edit/Delete Button Styles */
+.btn-edit, .btn-delete, .btn-save, .btn-cancel {
+    padding: 0.5rem; /* Smaller padding for icon buttons */
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.875rem;
+}
+
+.btn-edit {
+    color: #4b5563;
+    background-color: #f3f4f6;
+}
+.btn-edit:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-delete {
+    color: #dc2626; /* Red */
+    background-color: #fee2e2;
+}
+.btn-delete:hover {
+    background-color: #fecaca;
+}
+
+.btn-save {
+    background-color: #16a34a; /* Green */
+    color: white;
+    padding: 0.5rem 1rem; /* Wider save button */
+    width: auto;
+    height: auto;
+}
+.btn-save:hover {
+    background-color: #15803d;
+}
+
+.btn-cancel {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    padding: 0.5rem 1rem;
+    width: auto;
+    height: auto;
+}
+.btn-cancel:hover {
+    background-color: #e5e7eb;
+}
+
+
+/* Edit Mode Styles */
+.edit-form {
+    display: flex !important; /* Show the form */
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.edit-input {
+    flex-grow: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+.edit-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Hide text/actions when editing */
+.task-item.editing .task-text,
+.task-item.editing .task-actions {
+    display: none;
+}
+
+/* Show edit form when editing */
+.task-item.editing .edit-form {
+    display: flex !important;
+}
+
+.no-tasks {
+    text-align: center;
+    padding: 3rem;
+    color: #6b7280;
+    font-size: 1.125rem;
+}
