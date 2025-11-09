@@ -1,5 +1,15 @@
-# SESA-Lab-Project
 22.07.25
+# SESA-Lab-Project
+"Support Hero" is a community-driven platform where users can create and accept support services, donate transparently, and help build a network of trust and assistance.
+
+Faculty: [Sadia Jahan](https://uits.edu.bd/sadia-jahan/)
+
+Submitted by	: 
+1. Partho Kumar Ray Amit (070)
+2. Md. Ashraful Haque Zani (075)
+3. Gaus Saraf Murady (088)
+4. Md. Jubair Ahammed (112)
+
 
 # Group 7 files 
 (tomra jei email provide korso sheta diye dhukba) 
