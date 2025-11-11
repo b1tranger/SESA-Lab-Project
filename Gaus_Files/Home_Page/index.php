@@ -541,7 +541,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
                             <a href="#about">About</a>
                         </div>
                         <div class="social-links">
-                            <a href="https://github.com/b1tranger/SESA-Lab-Project" target="_blank" title="GitHub"><i
+                            <a href="https://github.com/b1tranger/Support-Hero_SESA-Lab-Project" target="_blank" title="GitHub"><i
                                     class="fab fa-github"></i></a>
                             <a href="https://www.linkedin.com/in/gaus-saraf-0471b81a4/" target="_blank"
                                 title="LinkedIn"><i class="fab fa-linkedin"></i></a>
