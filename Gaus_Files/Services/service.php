@@ -9,14 +9,45 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 $user_type = $_SESSION['user_type'] ?? 'visitor';
 $username = $_SESSION['username'] ?? 'visitor';
 
-// MODIFIED SQL: Added 'service_category'
+// --- NEW FILTER LOGIC ---
+$page_title = "All Services"; // Default title
+$filter_type = $_GET['type'] ?? null;
+$params = [];
+$types = "";
+
+// Base SQL query
 $sql = "SELECT service_id, user_id, service_name, details, service_type, service_category, username, deadline, compensation, 
                IF(status = '' OR status IS NULL, 'pending', status) as status, 
                accept_count, worker_limit 
-        FROM service 
-        ORDER BY deadline ASC"; //
+        FROM service";
 
-$result = mysqli_query($conn, $sql);
+// Check for a valid filter and add it to the query
+if ($filter_type === 'request' || $filter_type === 'offer') {
+    $sql .= " WHERE service_type = ?";
+    $params[] = $filter_type;
+    $types .= "s";
+
+    // Update page title
+    $page_title = "All " . ucfirst($filter_type) . "ed Services";
+}
+
+$sql .= " ORDER BY deadline ASC";
+// --- END FILTER LOGIC ---
+
+
+// --- NEW QUERY EXECUTION (USING PREPARED STATEMENTS IF FILTERED) ---
+if (!empty($params)) {
+    // Use prepared statement if there are filters
+    $stmt = mysqli_prepare($conn, $sql);
+    // Bind parameters dynamically
+    mysqli_stmt_bind_param($stmt, $types, ...$params);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+} else {
+    // Use original simple query if no filters
+    $result = mysqli_query($conn, $sql);
+}
+// --- END NEW QUERY EXECUTION ---
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +56,9 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Service List</title>
+
+    <title><?php echo $page_title; ?></title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="service.css">
 </head>
@@ -34,7 +67,9 @@ $result = mysqli_query($conn, $sql);
 
     <div class="list-container">
         <header class="list-header">
-            <h1>All Services</h1>
+
+            <h1><?php echo $page_title; ?></h1>
+
             <a href="../Home_Page/index.php" class="btn btn-back">Back to Home</a>
             <?php if ($user_type == 'admin'): ?>
                 <a href="../Home_Page/admin.php" class="btn btn-back">Back to Dashboard</a>
@@ -43,7 +78,7 @@ $result = mysqli_query($conn, $sql);
 
         <main class="service-grid">
             <?php
-            if (mysqli_num_rows($result) > 0) {
+            if ($result && mysqli_num_rows($result) > 0) { // Added check for $result
                 while ($row = mysqli_fetch_assoc($result)) {
                     // Get data for each service
                     $service_id = $row['service_id'];

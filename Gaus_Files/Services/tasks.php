@@ -15,8 +15,10 @@ $user_type = $_SESSION['user_type'];
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
     $new_task_text = trim($_POST['task_text']);
     if (!empty($new_task_text)) {
-        $stmt = $conn->prepare("INSERT INTO tasks (task_text) VALUES (?)");
-        $stmt->bind_param("s", $new_task_text);
+        // MODIFIED: Included 'source' in the insert
+        $source = "manually added";
+        $stmt = $conn->prepare("INSERT INTO tasks (task_text, source) VALUES (?, ?)");
+        $stmt->bind_param("ss", $new_task_text, $source);
         $stmt->execute();
         $stmt->close();
         // Redirect to self to prevent form resubmission
@@ -39,10 +41,19 @@ $result = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Task List</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Link to the new CSS file -->
     <link rel="stylesheet" href="tasks.css">
-    <!-- Font Awesome for icons (used in your index.php) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* Style for the source label */
+        .task-source {
+            display: block;
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 4px;
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
@@ -57,7 +68,6 @@ $result = mysqli_query($conn, $sql);
 
         </header>
 
-        <!-- "Add New Task" Form -->
         <form method="POST" action="tasks.php" class="add-task-form">
             <div class="form-group">
                 <input type="text" name="task_text" placeholder="Add a new task..." required>
@@ -65,7 +75,6 @@ $result = mysqli_query($conn, $sql);
             </div>
         </form>
 
-        <!-- The Task List -->
         <main class="task-list-main">
             <ul class="task-list" id="task-list-container">
                 <?php
@@ -73,21 +82,22 @@ $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $task_id = $row['task_id'];
                         $task_text = htmlspecialchars($row['task_text']);
+                        $source = htmlspecialchars($row['source']); // Get source
                         $is_completed = (bool) $row['is_completed'];
                         ?>
 
-                        <!-- Single Task Item -->
                         <li class="task-item <?php echo $is_completed ? 'completed' : ''; ?>"
                             data-task-id="<?php echo $task_id; ?>">
 
-                            <!-- Checkbox -->
                             <input type="checkbox" class="task-checkbox" <?php echo $is_completed ? 'checked' : ''; ?>>
 
-                            <!-- Task Content (Text or Edit Form) -->
                             <div class="task-content">
                                 <span class="task-text"><?php echo $task_text; ?></span>
 
-                                <!-- Hidden Edit Form -->
+                                <?php if (!empty($source)): ?>
+                                    <span class="task-source">Source: <?php echo $source; ?></span>
+                                <?php endif; ?>
+
                                 <form class="edit-form" style="display: none;">
                                     <input type="text" class="edit-input" value="<?php echo $task_text; ?>">
                                     <button type="submit" class="btn btn-save">Save</button>
@@ -95,7 +105,6 @@ $result = mysqli_query($conn, $sql);
                                 </form>
                             </div>
 
-                            <!-- Action Buttons -->
                             <div class="task-actions">
                                 <button class="btn btn-edit" title="Edit"><i class="fa-solid fa-pen"></i></button>
                                 <button class="btn btn-delete" title="Delete"><i class="fa-solid fa-trash"></i></button>
@@ -139,7 +148,7 @@ $result = mysqli_query($conn, $sql);
                         if (firstCompleted) {
                             listContainer.insertBefore(taskItem, firstCompleted);
                         } else {
-                            listContainer.appendChild(taskItem); // No completed items, just append (should be at top anyway)
+                            listContainer.appendChild(taskItem); // No completed items, just append
                         }
                     }
 
@@ -171,10 +180,6 @@ $result = mysqli_query($conn, $sql);
                 // --- 4. Handle "Delete" Button Click ---
                 if (e.target.closest('.btn-delete')) {
                     e.preventDefault();
-
-                    // Custom confirmation modal (since alert/confirm is disallowed)
-                    // For this example, we'll just delete immediately. 
-                    // Add a custom modal here if confirmation is critical.
 
                     // Remove from UI
                     taskItem.style.opacity = '0';

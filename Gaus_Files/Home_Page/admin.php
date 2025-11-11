@@ -97,7 +97,6 @@ if ($result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <!-- <link rel="stylesheet" href="admin.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
@@ -461,18 +460,23 @@ if ($result) {
                             <a href="users.php" class="metric-item">
                                 <p><?php echo $TotalUser; ?><br>Total Users</p>
                             </a>
-                            <a href="../Services/transactions.php" class="metric-item">
+                            
+                            <a href="../Services/transactions.php?ref=admin" class="metric-item">
                                 <p><?php echo $TotalBalance; ?><br>Total Balance</p>
                             </a>
+                            
                             <a href="../Services/service.php" class="metric-item">
                                 <p><?php echo $TotalServices; ?><br>Total Services</p>
                             </a>
-                            <a href="#" class="metric-item">
+
+                            <a href="../Services/service.php?type=request" class="metric-item">
                                 <p><?php echo $TotalRequests; ?><br>Total Requests</p>
                             </a>
-                            <a href="#" class="metric-item">
+
+                            <a href="../Services/service.php?type=offer" class="metric-item">
                                 <p><?php echo $TotalOffers; ?><br>Total Offers</p>
                             </a>
+
                             <a href="../Services/tasks.php" class="metric-item">
                                 <p><?php echo $TotalTasks; ?><br>Tasks</p>
                             </a>
@@ -482,7 +486,6 @@ if ($result) {
                             <a href="../Services/comments.php" class="metric-item">
                                 <p><?php echo $TotalComments; ?><br>Comments</p>
                             </a>
-                            <!-- <div class="metric-item">?</div> -->
                         </div>
 
                         <p class="analysis-note">Based on Feedback and Analysis</p>

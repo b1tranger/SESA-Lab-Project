@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2025 at 04:47 PM
+-- Generation Time: Nov 12, 2025 at 12:03 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -122,7 +122,8 @@ INSERT INTO `service` (`service_id`, `user_id`, `service_name`, `service_type`, 
 (16, 14, 'demo request 1', 'request', '', 'Saraf', 'gaus.gs12@gmail.com', '2025-11-11', 'some more details', 333, 'completed', 1, 1),
 (17, 6, 'demo check transaction update', 'offer', '', 'Gaus', 'gsmurady123@gmail.com', '2025-11-13', 'yoyoyo', 40, 'pending', 0, 1),
 (18, 9, 'demo service  4 to check user_id', 'request', '', 'Masud', 'masud@gmail.com', '2025-11-09', 'fsfsfe', 40, 'pending', 0, 1),
-(19, 6, 'demo 2 check transaction update', 'offer', '', 'Gaus', 'gsmurady123@gmail.com', '2025-11-13', 'rrerrerer', 400, 'pending', 0, 1);
+(19, 6, 'demo 2 check transaction update', 'offer', '', 'Gaus', 'gsmurady123@gmail.com', '2025-11-13', 'rrerrerer', 400, 'pending', 0, 1),
+(20, 6, 'demo 3 check service type', 'offer', 'others', 'Gaus', 'gsmurady123@gmail.com', '2025-11-13', 'rrr34r34', 400, 'pending', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -133,6 +134,7 @@ INSERT INTO `service` (`service_id`, `user_id`, `service_name`, `service_type`, 
 CREATE TABLE `tasks` (
   `task_id` int(11) NOT NULL,
   `task_text` text NOT NULL,
+  `source` varchar(256) NOT NULL,
   `is_completed` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -141,9 +143,9 @@ CREATE TABLE `tasks` (
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`task_id`, `task_text`, `is_completed`, `date_created`) VALUES
-(1, 'check task list', 0, '2025-11-01 14:32:48'),
-(2, 'check task list #2', 0, '2025-11-01 14:33:01');
+INSERT INTO `tasks` (`task_id`, `task_text`, `source`, `is_completed`, `date_created`) VALUES
+(1, 'check task list', '', 0, '2025-11-01 14:32:48'),
+(2, 'check task list #2', '', 0, '2025-11-01 14:33:01');
 
 -- --------------------------------------------------------
 
@@ -213,7 +215,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
-  MODIFY `service_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `service_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tasks`

@@ -13,6 +13,9 @@ include("../connection.php");
 $username = $_SESSION['username'];
 $user_type = $_SESSION['user_type'];
 
+// --- NEW: Check for referrer flag ---
+$referrer = $_GET['ref'] ?? null;
+
 // --- MODIFIED: Added `timestamp` to the query ---
 $sql_get_transactions = "SELECT user_id, amount, transaction_id, report, timestamp 
                          FROM transactions 
@@ -77,10 +80,20 @@ $result_transactions = mysqli_query($conn, $sql_get_transactions);
             text-decoration: underline;
         }
 
-        .btn-back {
-            display: inline-block;
+        /* --- NEW: Header for navigation buttons --- */
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1.5rem;
-            /* Space below button */
+            /* This was on btn-back, moved here */
+        }
+
+        .btn-back {
+            /* display: inline-block; */
+            /* No longer needed */
+            /* margin-bottom: 1.5rem; */
+            /* MOVED to .nav-header */
             padding: 0.6rem 1.2rem;
             background-color: #444;
             color: #f0f0f0;
@@ -95,6 +108,24 @@ $result_transactions = mysqli_query($conn, $sql_get_transactions);
             background-color: #555;
             color: #fff;
         }
+
+        /* --- NEW: Style for the dashboard button --- */
+        .btn-dashboard {
+            padding: 0.6rem 1.2rem;
+            background-color: #60a5fa;
+            /* Blue to stand out */
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn-dashboard:hover {
+            background-color: #3b82f6;
+        }
+
 
         /* --- New Transaction List Styles --- */
         .transaction-list-wrapper {
@@ -190,6 +221,19 @@ $result_transactions = mysqli_query($conn, $sql_get_transactions);
                 padding: 1.5rem;
             }
 
+            /* --- NEW: Responsive nav buttons --- */
+            .nav-header {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .btn-back,
+            .btn-dashboard {
+                text-align: center;
+                flex-grow: 1;
+                /* Allow buttons to grow */
+            }
+
             .transaction-item {
                 flex-direction: column;
                 /* Stack items vertically */
@@ -221,10 +265,17 @@ $result_transactions = mysqli_query($conn, $sql_get_transactions);
 
     <div class="form-container">
 
-        <a href="../Home_Page/index.php" class="btn-back">
-            &larr; Go to Homepage
-        </a>
+        <div class="nav-header">
+            <a href="../Home_Page/index.php" class="btn-back">
+                &larr; Go to Homepage
+            </a>
 
+            <?php if ($referrer === 'admin' && $user_type === 'admin'): ?>
+                <a href="../Home_Page/admin.php" class="btn-dashboard">
+                    Back to Dashboard &rarr;
+                </a>
+            <?php endif; ?>
+        </div>
         <h2>Transaction History</h2>
         <div class="transaction-list-wrapper">
             <ul class="transaction-list">

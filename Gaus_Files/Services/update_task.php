@@ -11,21 +11,47 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
 
 // --- MAIN API LOGIC ---
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
-    
+
     header('Content-Type: application/json');
     $action = $_POST['action'];
 
     switch ($action) {
-        
+
+        // --- ACTION: ADD (New task via AJAX) ---
+        case 'add':
+            if (isset($_POST['task_text'], $_POST['source'])) {
+                $task_text = trim($_POST['task_text']);
+                $source = trim($_POST['source']);
+
+                if (!empty($task_text)) {
+                    // Fixed table name from 'admin_tasks' to 'tasks'
+                    $stmt = $conn->prepare("INSERT INTO tasks (task_text, source) VALUES (?, ?)");
+                    $stmt->bind_param("ss", $task_text, $source);
+
+                    if ($stmt->execute()) {
+                        echo json_encode(['success' => true]);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'Database error']);
+                    }
+                    $stmt->close();
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Task text cannot be empty']);
+                }
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Missing parameters']);
+            }
+            break;
+
         // --- ACTION: TOGGLE (Check/Uncheck) ---
         case 'toggle':
             if (isset($_POST['task_id'], $_POST['is_completed'])) {
                 $task_id = (int) $_POST['task_id'];
                 $is_completed = (int) $_POST['is_completed']; // 1 or 0
-                
-                $stmt = $conn->prepare("UPDATE admin_tasks SET is_completed = ? WHERE task_id = ?");
+
+                // Fixed table name from 'admin_tasks' to 'tasks'
+                $stmt = $conn->prepare("UPDATE tasks SET is_completed = ? WHERE task_id = ?");
                 $stmt->bind_param("ii", $is_completed, $task_id);
-                
+
                 if ($stmt->execute()) {
                     echo json_encode(['success' => true]);
                 } else {
@@ -44,9 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
                 $task_text = trim($_POST['task_text']);
 
                 if (!empty($task_text)) {
-                    $stmt = $conn->prepare("UPDATE admin_tasks SET task_text = ? WHERE task_id = ?");
+                    // Fixed table name from 'admin_tasks' to 'tasks'
+                    $stmt = $conn->prepare("UPDATE tasks SET task_text = ? WHERE task_id = ?");
                     $stmt->bind_param("si", $task_text, $task_id);
-                    
+
                     if ($stmt->execute()) {
                         echo json_encode(['success' => true]);
                     } else {
@@ -54,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
                     }
                     $stmt->close();
                 } else {
-                     echo json_encode(['success' => false, 'message' => 'Task text cannot be empty']);
+                    echo json_encode(['success' => false, 'message' => 'Task text cannot be empty']);
                 }
             } else {
                 echo json_encode(['success' => false, 'message' => 'Missing parameters']);
@@ -66,9 +93,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             if (isset($_POST['task_id'])) {
                 $task_id = (int) $_POST['task_id'];
 
-                $stmt = $conn->prepare("DELETE FROM admin_tasks WHERE task_id = ?");
+                // Fixed table name from 'admin_tasks' to 'tasks'
+                $stmt = $conn->prepare("DELETE FROM tasks WHERE task_id = ?");
                 $stmt->bind_param("i", $task_id);
-                
+
                 if ($stmt->execute()) {
                     echo json_encode(['success' => true]);
                 } else {
