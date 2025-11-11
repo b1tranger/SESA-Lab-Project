@@ -9,8 +9,8 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 $user_type = $_SESSION['user_type'] ?? 'visitor';
 $username = $_SESSION['username'] ?? 'visitor';
 
-// MODIFIED SQL: Select user_id, worker_limit and clean up the status
-$sql = "SELECT service_id, user_id, service_name, details, service_type, username, deadline, compensation, 
+// MODIFIED SQL: Added 'service_category'
+$sql = "SELECT service_id, user_id, service_name, details, service_type, service_category, username, deadline, compensation, 
                IF(status = '' OR status IS NULL, 'pending', status) as status, 
                accept_count, worker_limit 
         FROM service 
@@ -47,10 +47,10 @@ $result = mysqli_query($conn, $sql);
                 while ($row = mysqli_fetch_assoc($result)) {
                     // Get data for each service
                     $service_id = $row['service_id'];
-                    $user_id = $row['user_id']; // --- ADDED THIS LINE ---
+                    $user_id = $row['user_id'];
                     $service_name = htmlspecialchars($row['service_name']);
                     $service_desc = htmlspecialchars($row['details']);
-
+                    $service_category = htmlspecialchars($row['service_category']); // --- MODIFIED: Added this line ---
                     $service_type = htmlspecialchars($row['service_type']); // 'request' or 'offer'
                     $service_poster = htmlspecialchars($row['username']); // The user who posted it
                     $deadline = htmlspecialchars(date("d M, Y", strtotime($row['deadline'])));
@@ -109,9 +109,11 @@ $result = mysqli_query($conn, $sql);
                         </div>
                         <div class="card-body">
                             <p class="service-meta" data-poster="<?php echo $service_poster; ?>"
-                                data-service-type="<?php echo $service_type; ?>">
+                                data-service-type="<?php echo $service_type; ?>"
+                                data-service-category="<?php echo $service_category; ?>">
                                 <strong>Posted by:</strong> <?php echo $service_poster; ?> (ID: <?php echo $user_id; ?>) |
-                                <strong>Type:</strong> <?php echo ucfirst($service_type); ?>
+                                <strong>Type:</strong> <?php echo ucfirst($service_type); ?> |
+                                <strong>Category:</strong> <?php echo ucfirst($service_category); ?>
                             </p>
                             <p class="service-meta">
                                 <strong>Compensation:</strong> <?php echo $compensation; ?> |
@@ -119,7 +121,8 @@ $result = mysqli_query($conn, $sql);
                             </p>
                             <p class="service-details"
                                 style="overflow-wrap: break-word; word-break: break-word; white-space: normal;">
-                                <?php echo $service_desc; ?></p>
+                                <?php echo $service_desc; ?>
+                            </p>
                         </div>
                         <div class="card-actions">
                             <?php if ($show_accept_button): ?>

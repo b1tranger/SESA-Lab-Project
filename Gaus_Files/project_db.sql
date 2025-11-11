@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: sql212.infinityfree.com
--- Generation Time: Nov 09, 2025 at 05:35 PM
--- Server version: 11.4.7-MariaDB
--- PHP Version: 7.2.22
+-- Host: 127.0.0.1
+-- Generation Time: Nov 11, 2025 at 04:47 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `if0_40351225_project_db`
+-- Database: `project_db`
 --
 
 -- --------------------------------------------------------
@@ -42,13 +41,13 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`email`, `password`, `username`, `user_id`, `type`, `balance`) VALUES
-('gsmurady123@gmail.com', '1234', 'Gaus', 6, 'provider', '1034.00'),
-('masud@gmail.com', '12345', 'Masud', 9, 'consumer', '0.00'),
-('gaus.admin@gmail.com', 'admin1234', 'Gaus', 10, 'admin', '99.00'),
-('jubair.admin@gmail.com', 'admin1234', 'Jubair', 11, 'admin', '0.00'),
-('amit.admin@gmail.com', 'admin1234', 'Amit', 12, 'admin', '0.00'),
-('zani.admin@gmail.com', 'admin1234', 'Zani', 13, 'admin', '0.00'),
-('gaus.gs12@gmail.com', '123', 'Saraf', 14, 'consumer', '263.00');
+('gsmurady123@gmail.com', '1234', 'Gaus', 6, 'provider', 689.00),
+('masud@gmail.com', '12345', 'Masud', 9, 'consumer', 3960.00),
+('gaus.admin@gmail.com', 'admin1234', 'Gaus', 10, 'admin', 99.00),
+('jubair.admin@gmail.com', 'admin1234', 'Jubair', 11, 'admin', 0.00),
+('amit.admin@gmail.com', 'admin1234', 'Amit', 12, 'admin', 0.00),
+('zani.admin@gmail.com', 'admin1234', 'Zani', 13, 'admin', 0.00),
+('gaus.gs12@gmail.com', '123', 'Saraf', 14, 'consumer', 263.00);
 
 -- --------------------------------------------------------
 
@@ -103,6 +102,7 @@ CREATE TABLE `service` (
   `user_id` int(50) NOT NULL,
   `service_name` varchar(100) NOT NULL,
   `service_type` varchar(256) NOT NULL,
+  `service_category` varchar(256) NOT NULL,
   `username` varchar(256) NOT NULL,
   `email` varchar(256) NOT NULL,
   `deadline` date NOT NULL,
@@ -117,9 +117,12 @@ CREATE TABLE `service` (
 -- Dumping data for table `service`
 --
 
-INSERT INTO `service` (`service_id`, `user_id`, `service_name`, `service_type`, `username`, `email`, `deadline`, `details`, `compensation`, `status`, `accept_count`, `worker_limit`) VALUES
-(15, 6, 'demo offer 1', 'offer', 'Gaus', 'gsmurady123@gmail.com', '2025-11-10', 'some details', 255, 'pending', 1, 5),
-(16, 14, 'demo request 1', 'request', 'Saraf', 'gaus.gs12@gmail.com', '2025-11-11', 'some more details', 333, 'pending', 0, 1);
+INSERT INTO `service` (`service_id`, `user_id`, `service_name`, `service_type`, `service_category`, `username`, `email`, `deadline`, `details`, `compensation`, `status`, `accept_count`, `worker_limit`) VALUES
+(15, 6, 'demo offer 1', 'offer', '', 'Gaus', 'gsmurady123@gmail.com', '2025-11-10', 'some details', 255, 'completed', 1, 5),
+(16, 14, 'demo request 1', 'request', '', 'Saraf', 'gaus.gs12@gmail.com', '2025-11-11', 'some more details', 333, 'completed', 1, 1),
+(17, 6, 'demo check transaction update', 'offer', '', 'Gaus', 'gsmurady123@gmail.com', '2025-11-13', 'yoyoyo', 40, 'pending', 0, 1),
+(18, 9, 'demo service  4 to check user_id', 'request', '', 'Masud', 'masud@gmail.com', '2025-11-09', 'fsfsfe', 40, 'pending', 0, 1),
+(19, 6, 'demo 2 check transaction update', 'offer', '', 'Gaus', 'gsmurady123@gmail.com', '2025-11-13', 'rrerrerer', 400, 'pending', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -161,8 +164,12 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`transaction_id`, `user_id`, `amount`, `report`, `timestamp`) VALUES
-(13, 14, '500.00', 'Added to Balance', '2025-11-09 09:20:23'),
-(14, 14, '-333.00', 'Funded service: demo request 1', '2025-11-09 09:20:34');
+(13, 14, 500.00, 'Added to Balance', '2025-11-09 09:20:23'),
+(14, 14, -333.00, 'Funded service: demo request 1', '2025-11-09 09:20:34'),
+(15, 6, 55.00, 'Added to Balance', '2025-11-11 21:39:41'),
+(16, 9, 4000.00, 'Added to Balance', '2025-11-11 21:43:04'),
+(17, 9, -40.00, 'Funded service: demo service  4 to check user_id', '2025-11-11 21:43:10'),
+(18, 6, -400.00, 'Funded service: demo 2 check transaction update', '2025-11-11 21:44:23');
 
 --
 -- Indexes for dumped tables
@@ -206,7 +213,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
-  MODIFY `service_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `service_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tasks`
@@ -218,7 +225,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `transaction_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

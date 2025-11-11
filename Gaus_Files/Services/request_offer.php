@@ -19,7 +19,7 @@ $user_id = $_SESSION['user_id'];
 
 
 $flag = 0; // 0=idle, 1=error, 2=success
-$error_message = ''; // --- NEW --- Variable to hold specific error messages
+$error_message = ''; // Variable to hold specific error messages
 
 // 3. SET SERVICE TYPE BASED ON USER ROLE
 $service_type_value = '';
@@ -48,6 +48,7 @@ if (isset($_POST['submit'])) {
     // Get all form data
     $service_name = trim($_POST['service_name']);
     $service_type = $_POST['service_type']; // from hidden input
+    $service_category = trim($_POST['service_category']); // --- NEW ---
     $deadline = trim($_POST['deadline']);
     $details = $_POST['details'];
     $compensation = (int) trim($_POST['compensation']);
@@ -55,12 +56,13 @@ if (isset($_POST['submit'])) {
     $status_default = 'pending'; // As requested in your SQL
 
     // Validate inputs
-    if (empty($service_name) || empty($service_type) || empty($deadline) || empty($details) || $compensation < 0 || $worker_limit <= 0) {
+    // --- MODIFIED --- Added check for service_category
+    if (empty($service_name) || empty($service_type) || empty($deadline) || empty($details) || $compensation < 0 || $worker_limit <= 0 || empty($service_category)) {
         $flag = 1; // Error
-        $error_message = "Please fill out all fields correctly. Ensure compensation and worker limit are valid numbers."; // --- MODIFIED ---
+        $error_message = "Please fill out all fields correctly. Ensure compensation and worker limit are valid numbers.";
     } else {
 
-        // --- NEW: BALANCE CHECK LOGIC ---
+        // --- BALANCE CHECK LOGIC ---
         $balance_sufficient = true; // Assume true unless check fails
 
         // Only check balance for consumers posting a request with a cost
@@ -78,36 +80,37 @@ if (isset($_POST['submit'])) {
                 $current_balance = $row['balance'];
 
                 if ($current_balance < $compensation) {
-                    // --- NEW: Set flags and error message if balance is insufficient ---
                     $balance_sufficient = false;
                     $flag = 1;
                     $error_message = "Insufficient funds. Your current balance is " . $current_balance . " BDT, but this request requires " . $compensation . " BDT.";
                 }
             } else {
-                // This case should ideally not happen if user is logged in
                 $balance_sufficient = false;
                 $flag = 1;
                 $error_message = "Error: Could not retrieve your account balance.";
             }
             $stmt_check->close();
         }
-        // --- END OF NEW BALANCE CHECK ---
+        // --- END OF BALANCE CHECK ---
 
 
-        // --- MODIFIED: Proceed only if all checks passed ---
+        // Proceed only if all checks passed
         if ($balance_sufficient && $flag == 0) {
 
             // 5. USE PREPARED STATEMENT (Prevents SQL Injection)
-            $sql = "INSERT INTO service (user_id,service_name, service_type, username, email, deadline, details, compensation, status, worker_limit) 
-                    VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // --- MODIFIED --- Added 'service_category' to the query
+            $sql = "INSERT INTO service (user_id, service_name, service_type, service_category, username, email, deadline, details, compensation, status, worker_limit) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $conn->prepare($sql);
-            // s = string, i = integer
+
+            // --- MODIFIED --- Added 's' for service_category (issssssisi -> isssssssisi)
             $stmt->bind_param(
-                "issssssisi",
+                "isssssssisi",
                 $user_id,
                 $service_name,
                 $service_type,
+                $service_category, // --- NEW ---
                 $username,
                 $email,
                 $deadline,
@@ -122,7 +125,6 @@ if (isset($_POST['submit'])) {
                 $flag = 2; // Success
 
                 // Only deduct balance if the user is a 'consumer' posting a 'request'
-                // This logic is the same, but now we know they have sufficient funds
                 if ($service_type == 'request' && $user_type == 'consumer' && $compensation > 0) {
 
                     // Deduct from balance
@@ -145,7 +147,7 @@ if (isset($_POST['submit'])) {
 
             } else {
                 $flag = 1; // Error
-                $error_message = "A database error occurred. Please try again."; // --- MODIFIED ---
+                $error_message = "A database error occurred. Please try again.";
             }
             $stmt->close();
         }
@@ -160,9 +162,8 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Service - Support Hero</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css"> <!-- Linking to your main style.css -->
+    <link rel="stylesheet" href="../style.css">
 
-    <!-- Using styles from your original file -->
     <style>
         body {
             margin: 0;
@@ -229,6 +230,11 @@ if (isset($_POST['submit'])) {
             outline: none;
             border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        /* --- NEW --- Style for placeholder option */
+        select option[disabled] {
+            color: #888;
         }
 
         /* Style for readonly inputs */
@@ -315,6 +321,17 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <div class="form-group">
+                    <label for="service_category">Service Category:</label>
+                    <select id="service_category" name="service_category" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="cleaning">Cleaning</option>
+                        <option value="waste management">Waste Management</option>
+                        <option value="transport & delivery">Transport & Delivery</option>
+                        <option value="security">Security</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="details">Details:</label>
                     <textarea id="details" name="details" rows="5" placeholder="Enter service details here..."
                         required></textarea>
@@ -348,7 +365,10 @@ if (isset($_POST['submit'])) {
                         <h3>Error</h3>
                         <p><?php echo $error_message; ?></p>
                         <br>
-                        <p><a href="../Services/add_balance.php">Add Balance</a></p><br>
+                    <?php if (strpos($error_message, 'Insufficient funds') !== false) { ?>
+                            <p><a href="../Services/add_balance.php">Add Balance</a></p><br>
+                    <?php } ?>
+                        <p><a href="request_offer.php">Try again</a></p>
                 <?php } ?>
 
             </div>

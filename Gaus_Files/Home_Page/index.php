@@ -1,5 +1,3 @@
-<!-- Home_Page(demo03) -->
-
 <?php
 
 include("../connection.php");
@@ -59,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support Hero - Connecting People</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="index.css"> -->
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -121,9 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
 
 <body>
 
-    <!-- Navigation -->
     <nav>
-        <!-- Desktop Navigation -->
         <div class="desktop-nav">
             <div class="desktop-nav-card">
                 <ul>
@@ -148,7 +143,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
             </div>
         </div>
 
-        <!-- Mobile Navigation -->
         <div class="mobile-nav">
             <ul>
                 <li><a href="#about" title="About"><i class="fa-solid fa-circle-info"
@@ -171,7 +165,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
         </div>
     </nav>
 
-    <!-- Sticky Header -->
     <header id="sticky-header" class="sticky-header">
         <div class="container">
             <?php if ($user_type == 'admin'): ?>
@@ -187,16 +180,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
 
                 <a href="../Registration_Login/logout.php" class="btn btn-red">Logout</a>
             <?php else: ?>
-                <!-- ORIGINAL: Show this if user is not logged in -->
                 <a href="#account" class="btn btn-blue">Join us</a>
                 <a href="#services" class="btn btn-green">Services</a>
             <?php endif; ?>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Section 1: Hero -->
         <section id="home" class="full-screen-section hero-bg">
             <div class="overlay"></div>
             <div class="content">
@@ -225,7 +215,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
             </a>
         </section>
 
-        <!-- Section 2: About -->
         <section id="about" class="full-screen-section" style="background-color: #f9fafb;">
             <div class="section-content">
                 <h2>About Our Mission</h2>
@@ -272,7 +261,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
         </section>
 
 
-        <!-- Section 3: Service List -->
         <section id="services" class="full-screen-section">
             <div class="section-content">
                 <h2>Services</h2>
@@ -280,9 +268,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
                 <?php
                 include("../connection.php");
 
-                // MODIFIED: Updated SQL query to get all the new fields.
-                // I am ASSUMING your columns are named 'id', 'service_type', 'username', 'deadline', 'compensation'
-                $sql = "SELECT service_id, service_name, details, service_type, username, deadline, compensation FROM service ORDER BY deadline ASC LIMIT 6";
+                // --- MODIFIED --- Updated SQL query to get 'service_category'
+                $sql = "SELECT service_id, service_name, details, service_type, service_category, username, deadline, compensation 
+                        FROM service 
+                        ORDER BY deadline ASC 
+                        LIMIT 6";
                 $result = mysqli_query($conn, $sql);
                 ?>
 
@@ -298,6 +288,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
                             $service_name = htmlspecialchars($row['service_name']);
                             $service_desc = htmlspecialchars($row['details']);
                             $service_type = htmlspecialchars($row['service_type']);
+                            $service_category = htmlspecialchars($row['service_category']); // --- MODIFIED ---
                             $username = htmlspecialchars($row['username']);
                             $deadline = htmlspecialchars(date("d M, Y", strtotime($row['deadline']))); // Format the date
                             $compensation = htmlspecialchars($row['compensation']);
@@ -313,8 +304,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
                         <div class="service-list-item">
                             <div class="service-info">
                                 <h3>' . $service_name . '</h3>
-                                <p><strong>Provider:</strong> ' . $username . ' | <strong>Type:</strong> ' . $service_type . '</p>
-                                <p><strong>Compensation:</strong> ' . $compensation . ' | <strong>Deadline:</strong> ' . $deadline . '</p>
+                                <p><strong>Provider:</strong> ' . $username . ' | <strong>Type:</strong> ' . ucfirst($service_type) . ' | <strong>Category:</strong> ' . ucfirst($service_category) . '</p>
+                                <p><strong>Compensation:</strong> ' . $compensation . ' BDT | <strong>Deadline:</strong> ' . $deadline . '</p>
                                 <p class="service-desc-snippet">' . $details_snippet . '</p>
                             </div>
                             ';
@@ -352,7 +343,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
         </section>
 
         <?php if (!$is_logged_in): ?>
-            <!-- Section 4: Accounts -->
             <section id="account" class="full-screen-section" style="background-color: white;">
                 <div class="section-content">
                     <h2>Get involved</h2>
@@ -372,7 +362,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
             </section>
         <?php endif ?>
 
-        <!-- Section 6: Transactions -->
         <section id="transactions" class="full-screen-section" style="background-color: #f9fafb;">
             <div class="section-content">
                 <h2>Recent Transactions</h2>
@@ -445,7 +434,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
         </section>
 
 
-        <!-- Section 5: Donations -->
         <section id="donation" class="full-screen-section" style="background-color: #f9fafb;">
             <div class="section-content">
                 <h2>Become a Donor !</h2>
@@ -482,8 +470,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
         </section>
 
 
-
-        <!-- Comments -->
 
         <section id="comments" class="full-screen-section">
             <div class="section-content">
@@ -544,12 +530,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
             </div>
         </section>
 
-        <!-- Section 7: Contact -->
         <section id="contact" class="full-screen-section">
             <div class="section-content">
                 <h2>Contact Us</h2>
 
-                <!-- ADDED: New Footer Content -->
                 <footer class="site-footer">
                     <div class="footer-nav">
                         <div class="footer-links">
@@ -567,8 +551,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
                         "Connecting those in need with those who can help. A community-driven support system."
                     </p>
                 </footer>
-                <!-- END: New Footer Content -->
-
             </div>
         </section>
 
@@ -582,7 +564,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
 
     </main>
 
-    <!-- Combined JS -->
     <script>
         // JavaScript for sticky header AND go-to-top button
         document.addEventListener('DOMContentLoaded', function () {
@@ -616,31 +597,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
             window.addEventListener('scroll', toggleStickyElements);
         });
     </script>
-
-</body>
-
-</html>
-
-<!-- <script>
-        // JavaScript for the sticky header
-        document.addEventListener('DOMContentLoaded', function () {
-            const stickyHeader = document.getElementById('sticky-header');
-            const heroSection = document.getElementById('home');
-
-            // Function to toggle the sticky header
-            const toggleStickyHeader = () => {
-                // The offsetHeight gives the full height of the hero section
-                if (window.scrollY > heroSection.offsetHeight) {
-                    stickyHeader.classList.add('show');
-                } else {
-                    stickyHeader.classList.remove('show');
-                }
-            };
-
-            // Listen for scroll events
-            window.addEventListener('scroll', toggleStickyHeader);
-        });
-    </script> -->
 
 </body>
 
