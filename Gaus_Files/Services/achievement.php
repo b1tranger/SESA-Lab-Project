@@ -1,7 +1,7 @@
 <?php
 // 1. REQUIRE LOGIN
 session_start();
-
+include("../connection.php");
 // Check if the user is logged in. If not, redirect to login page.
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("location: ../Registration_Login/login.php");
@@ -9,18 +9,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 // 2. GET ACHIEVEMENT DATA
-include("../connection.php");
-$username = $_SESSION['username'];
+
+// $username = $_SESSION['username']; // No longer needed for query
 $user_type = $_SESSION['user_type'];
 
-// Fetch all completed services for the logged-in user
-$sql_get_achievements = "SELECT service_name, compensation, details, deadline 
+// MODIFIED: Fetch *all* completed services and include username/service_type
+$sql_get_achievements = "SELECT service_name, compensation, details, deadline, username, service_type 
                          FROM service 
-                         WHERE username = ? AND status = 'completed' 
+                         WHERE status = 'completed' 
                          ORDER BY deadline DESC";
 
 $stmt = $conn->prepare($sql_get_achievements);
-$stmt->bind_param("s", $username);
+// $stmt->bind_param("s", $username); // No longer needed
 $stmt->execute();
 $result_achievements = $stmt->get_result();
 
@@ -31,12 +31,10 @@ $result_achievements = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Removed the 10-second refresh, as it's not needed here -->
-    <title>My Achievements - Support Hero</title>
+    <title>Our Achievements - Support Hero</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for a checkmark icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <style>
         body {
             margin: 0;
@@ -48,7 +46,7 @@ $result_achievements = $stmt->get_result();
             align-items: center;
             justify-content: center;
             padding: 2rem 0;
-            box-sizing: border-box; 
+            box-sizing: border-box;
         }
 
         .form-container {
@@ -80,10 +78,10 @@ $result_achievements = $stmt->get_result();
             color: #93c5fd;
             text-decoration: underline;
         }
-        
+
         .btn-back {
             display: inline-block;
-            margin-bottom: 1.5rem; 
+            margin-bottom: 1.5rem;
             padding: 0.6rem 1.2rem;
             background-color: #444;
             color: #f0f0f0;
@@ -99,14 +97,13 @@ $result_achievements = $stmt->get_result();
             color: #fff;
         }
 
-        /* --- New Achievement List Styles --- */
         .achievement-list-wrapper {
-            background-color: #2a2a2a; 
+            background-color: #2a2a2a;
             border-radius: 8px;
-            overflow: hidden; 
+            overflow: hidden;
             border: 1px solid #444;
-            max-height: 60vh; 
-            overflow-y: auto; 
+            max-height: 60vh;
+            overflow-y: auto;
         }
 
         .achievement-list {
@@ -123,20 +120,20 @@ $result_achievements = $stmt->get_result();
             border-bottom: 1px solid #444;
             gap: 1rem;
         }
-        
+
         .achievement-item:last-child {
             border-bottom: none;
         }
 
         .achievement-icon {
             font-size: 1.5rem;
-            color: #22c55e; /* Green for completed */
+            color: #22c55e;
             flex-shrink: 0;
         }
 
         .achievement-details {
             flex-grow: 1;
-            min-width: 200px; 
+            min-width: 200px;
         }
 
         .achievement-details p {
@@ -144,105 +141,140 @@ $result_achievements = $stmt->get_result();
             color: #ccc;
             font-size: 0.9rem;
         }
-        
+
         /* Service Name */
         .achievement-details h3 {
-            margin: 0 0 0.25rem 0;
+            margin: 0;
+            /* MODIFIED */
             font-size: 1.1rem;
             color: #f0f0f0;
             font-weight: 600;
         }
-        
+
+        /* --- NEW STYLES --- */
+        .achievement-details .user-details {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin: 0.35rem 0 0.35rem 0;
+            /* Add spacing above and below */
+        }
+
+        .achievement-details .user-details strong {
+            color: #f0f0f0;
+            font-weight: 500;
+        }
+
+        .achievement-details .user-details .service-type {
+            text-transform: capitalize;
+            background-color: #444;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #ddd;
+        }
+
+        /* --- END NEW STYLES --- */
+
         .achievement-details .date {
             font-size: 0.8rem;
             color: #999;
             font-style: italic;
+            margin-top: 0;
+            /* MODIFIED */
         }
 
         .achievement-compensation {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #22c55e; /* Green */
-            flex-shrink: 0; 
+            color: #22c55e;
+            flex-shrink: 0;
         }
-        
+
         .no-achievements {
-            justify-content: center; 
+            justify-content: center;
             color: #999;
             padding: 1.5rem;
             text-align: center;
         }
-        
+
         @media (max-width: 480px) {
             .form-container {
                 width: 95%;
                 padding: 1.5rem;
             }
-            
+
             .achievement-item {
-                flex-wrap: wrap; /* Allow wrapping */
-                align-items: flex-start; /* Align to the left */
-                gap: 0.5rem; 
+                flex-wrap: wrap;
+                align-items: flex-start;
+                gap: 0.5rem;
             }
 
             .achievement-icon {
                 font-size: 1.2rem;
-                /* Move icon next to title */
-                order: 1; 
+                order: 1;
             }
 
             .achievement-details {
-                order: 2; /* Title/details after icon */
-                flex-basis: 70%; /* Take most of the space */
+                order: 2;
+                flex-basis: 70%;
             }
 
             .achievement-compensation {
                 font-size: 1.1rem;
-                order: 3; /* Compensation on its own line */
+                order: 3;
                 flex-basis: 100%;
-                text-align: left; /* Align to the left */
+                text-align: left;
                 margin-top: 0.5rem;
             }
         }
-
     </style>
 </head>
 
 <body>
 
     <div class="form-container">
-        
+
         <a href="../Home_Page/index.php" class="btn-back">
             &larr; Go to Homepage
         </a>
 
         <h2>Our Achievements</h2>
-        
+
         <div class="achievement-list-wrapper">
             <ul class="achievement-list">
 
                 <?php
                 if ($result_achievements && mysqli_num_rows($result_achievements) > 0) {
                     while ($row = mysqli_fetch_assoc($result_achievements)) {
-                        
+
                         // Sanitize output
                         $service_name = htmlspecialchars($row['service_name']);
-                        $compensation = (float)$row['compensation'];
-                        $deadline = htmlspecialchars(date("d M, Y", strtotime($row['deadline']))); // Format the date
-
+                        $compensation = (float) $row['compensation'];
+                        $deadline = htmlspecialchars(date("d M, Y", strtotime($row['deadline'])));
+                        $service_username = htmlspecialchars($row['username']); // NEW
+                        $service_type = htmlspecialchars($row['service_type']); // NEW
+                
                         // Display the item
                         echo '<li class="achievement-item">';
                         echo '  <div class="achievement-icon"><i class="fas fa-check-circle"></i></div>';
-                        
+
                         echo '  <div class="achievement-details">';
                         echo "      <h3>$service_name</h3>";
+
+                        // --- NEW HTML BLOCK ---
+                        echo "      <p class='user-details'>";
+                        echo "          By: <strong>$service_username</strong> | Type: <span class='service-type'>$service_type</span>";
+                        echo "      </p>";
+                        // --- END NEW HTML BLOCK ---
+                
                         echo "      <p class='date'>Completed on (or by): $deadline</p>";
                         echo '  </div>';
-                        
-                        echo "  <div classS='achievement-compensation'>";
+
+                        // Note: There was a typo here, "classS". I fixed it to "class".
+                        echo "  <div class='achievement-compensation'>"; // MODIFIED
                         echo "      +" . number_format($compensation, 2) . " BDT";
                         echo '  </div>';
-                        
+
                         echo '</li>';
                     }
                 } else {
@@ -251,10 +283,11 @@ $result_achievements = $stmt->get_result();
                 }
                 $stmt->close();
                 ?>
-                
+
             </ul>
         </div>
 
     </div>
 </body>
+
 </html>
