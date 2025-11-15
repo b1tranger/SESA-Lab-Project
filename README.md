@@ -6,6 +6,7 @@ This is a Lab project for our Software Engineering and System Analysis Lab (CSE0
 Faculty: [Sadia Jahan](https://uits.edu.bd/sadia-jahan/)
 
 Submitted by	: 
+(Group 7: "Team Nexus Codex")
 1. Partho Kumar Ray Amit (070)
 2. Md. Ashraful Haque Zani (075)
 3. Gaus Saraf Murady (088)
