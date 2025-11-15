@@ -34,6 +34,7 @@ Submitted by	:
 - database files are at the path: `C:\xampp\mysql\data\*`
 - but to export it, open the database in XAMPP and use "Export" to export as a .sql file (or, ".sql.zip")
 - in the new location (in a different computer) create a new database, and use "Import" and select the .sql file or the .sql.zip to import the database files.
+- For the hosting, make sure DB connection file has the information of the hosting account, and not the localhost details (like "root", "localhost")
 
 # Future Additions
 - Consistent reminder of services: Accepted / Offered sevices will be reminded throughout the website using a popup bar on the screen
