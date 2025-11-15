@@ -1,0 +1,413 @@
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* --- Root Variables for Light Theme --- */
+:root {
+    --bg-primary: #f4f7fa;
+    /* Main background (light gray) */
+    --bg-secondary: #ffffff;
+    /* Card/Sidebar background (white) */
+    --border-color: #dee2e6;
+    /* Borders */
+    --text-primary: #212529;
+    /* Main text (dark gray) */
+    --text-accent: #007bff;
+    /* Accent color (blue) */
+    --text-muted: #6c757d;
+    /* Muted text (medium gray) */
+    --hover-bg: #f8f9fa;
+    /* Hover for metric boxes */
+    --hover-link: #0056b3;
+    /* Hover for links (darker blue) */
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    /* Softer shadow */
+}
+
+/* --- Basic Setup --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Padding moved to layout container */
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* --- Dashboard Layout (Sidebar + Main) --- */
+.dashboard-layout {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* --- Detached Sidebar --- */
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    border: 1px solid var(--border-color);
+
+    position: sticky;
+    top: 20px;
+    height: calc(100vh - 40px);
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--text-accent);
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar a:hover {
+    background-color: var(--hover-bg);
+    color: var(--hover-link);
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.dashboard-container {
+    width: 100%;
+    /* Removed text-align: center; */
+}
+
+.dashboard-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+    color: var(--text-primary);
+    /* Main text color for title */
+
+    /* Center the H1 */
+    display: block;
+    text-align: center;
+}
+
+.dashboard-container h1::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    /* Center the underline */
+    transform: translateX(-50%);
+    width: 100px;
+    /* Give it a fixed or max-width */
+    bottom: -10px;
+    height: 2px;
+    background-color: var(--text-accent);
+    /* Accent color for underline */
+}
+
+.dashboard-content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* --- Card Styles (Light Theme) --- */
+.info-card,
+/* Renamed from .admin-info-card */
+.overview-card,
+.records-card {
+    /* --- NEW --- added .records-card */
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    text-align: left;
+}
+
+.info-card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+}
+
+.info-card h2,
+.overview-card h2,
+.records-card h2 {
+    /* --- NEW --- added .records-card h2 */
+    margin-top: 0;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.info-card p {
+    margin: 10px 0;
+    font-size: 1em;
+}
+
+.overview-card {
+    flex: 2;
+    min-width: 320px;
+    max-width: 100%;
+}
+
+.overview-note {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+}
+
+/* --- Metrics Grid (Light Theme) --- */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.metric-item {
+    background-color: var(--bg-primary);
+    /* Light gray, same as body */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 20px 10px;
+    text-align: center;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    min-height: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.metric-item p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.metric-item:hover {
+    background-color: var(--hover-bg);
+    /* Slightly different light gray */
+    transform: translateY(-2px);
+    color: var(--hover-link);
+}
+
+.metric-item:not(a):hover {
+    color: var(--text-primary);
+    cursor: default;
+}
+
+/* --- NEW STYLES FOR SERVICE RECORDS --- */
+.records-card {
+    flex: 1 1 100%;
+    /* Make it full width */
+    max-width: 100%;
+    order: 3;
+    /* Display after info and overview */
+}
+
+.service-record-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.service-record-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
+    gap: 10px;
+    /* Gap for wrapping */
+    padding: 15px;
+    background-color: var(--bg-primary);
+    /* Light gray bg */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.service-record-item:hover {
+    background-color: var(--hover-bg);
+    /* White hover */
+}
+
+.record-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    /* Allow info to grow */
+    min-width: 200px;
+    /* Prevent it from getting too squished */
+}
+
+.record-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1em;
+}
+
+.record-meta {
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.record-status {
+    flex-shrink: 0;
+    /* Prevent status from shrinking */
+}
+
+.status-badge {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+/* Status colors (borrowed from service.css) */
+.status-badge.status-pending {
+    background-color: #fef3c7;
+    /* Yellow */
+    color: #92400e;
+}
+
+.status-badge.status-in-progress {
+    background-color: #dbeafe;
+    /* Blue */
+    color: #1d4ed8;
+}
+
+.status-badge.status-completed {
+    background-color: #d1fae5;
+    /* Green */
+    color: #065f46;
+}
+
+/* --- END OF NEW STYLES --- */
+
+
+.analysis-note {
+    /* Kept this class in case you want to add it back */
+    font-size: 0.9em;
+    color: var(--text-muted);
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* --- Mobile-specific adjustments (Identical to admin.css) --- */
+@media (max-width: 900px) {
+    .dashboard-layout {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .dashboard-container h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .info-card,
+    .overview-card,
+    .records-card {
+        /* --- NEW --- */
+        max-width: 100%;
+    }
+
+    .info-card {
+        order: 2;
+    }
+
+    .overview-card {
+        order: 1;
+    }
+
+    .records-card {
+        order: 3;
+        /* --- NEW --- */
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+
+    .metric-item {
+        padding: 15px 5px;
+        min-height: 50px;
+    }
+
+    .overview-note,
+    .analysis-note {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container h1 {
+        font-size: 1.8em;
+    }
+
+    .info-card h2,
+    .overview-card h2,
+    .records-card h2 {
+        /* --- NEW --- */
+        font-size: 1.3em;
+    }
+}
